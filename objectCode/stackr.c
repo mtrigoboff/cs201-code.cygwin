@@ -7,14 +7,10 @@
 
 int sumOf(int n)
 {
-    int     sum = 0;
-    
     if (n == 1)
-        sum = 1;
+        return 1;
     else
-        sum = n + sumOf(n - 1);
-    
-    return sum;
+        return n + sumOf(n - 1);
 }
 
 int main(int argc, char **argv)

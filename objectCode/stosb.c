@@ -7,7 +7,8 @@ int main (void)
     char    array[] = {'a', 'b', 'c', 'd', 'e'};
     
     // fill array with new character
-    asm("       lea     %[array], %%edi         \n"
+    asm("       cld     						\n"		// increment
+    	"       lea     %[array], %%edi         \n"
         "       mov     $'+', %%al              \n"
         "       mov     %[LGTH], %%ecx          \n"
         "       rep stosb                       \n"

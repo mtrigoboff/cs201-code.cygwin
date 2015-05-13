@@ -1,3 +1,2 @@
 syntax: regexp
 
-^[a-zA-z0-9]+$

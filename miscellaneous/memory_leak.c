@@ -1,13 +1,20 @@
 // Create memory leak by allocating memory,
 // and not freeing it (unless argv[1] is provided).
 //
+// The valgrind Linux utility can be used
+// to detect memory leaks.
+//
+// The bash script named mchk in ~michael.trigoboff/bin
+// calls valgrind with the appropriate arguments
+// for detecting memory leaks.
+//
 // To see memory leak, call like this:
 //
-//		valgrind memory_leak
+//		mchk memory_leak
 //
-// To provide argv, call like this:
+// To provide argv[1], call like this:
 //
-//		valgrind 'memory_leak x'
+//		mchk 'memory_leak x'
 
 #include <stdio.h>
 #include <stdlib.h>

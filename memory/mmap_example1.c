@@ -1,3 +1,7 @@
+// code example demonstrating use of mmap/munmap
+//
+// 'industrial-strength' code with full error checking
+
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -16,6 +20,7 @@ main(int argc, char *argv[])
 	struct stat sb;
 	off_t offset, pa_offset;
 	size_t length;
+	ssize_t size;
 	ssize_t s;
 
 	if (argc < 3 || argc > 4) {
@@ -23,7 +28,7 @@ main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 		}
 
-	fd = open(argv[1], O_RDONLY);
+	fd = open(argv[1], O_RDWR);
 	if (fd == -1)
 		handle_error("open");
 
@@ -49,8 +54,8 @@ main(int argc, char *argv[])
 		length = sb.st_size - offset;
 		}
 
-	addr = mmap(NULL, length + offset - pa_offset, PROT_READ,
-				MAP_PRIVATE, fd, pa_offset);
+	size = length + offset - pa_offset;
+	addr = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, pa_offset);
 	if (addr == MAP_FAILED)
 		handle_error("mmap");
 
@@ -63,5 +68,8 @@ main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 		}
 
+	addr[3] = 'z';
+	munmap(addr, sb.st_size);
+	close(fd);
 	exit(EXIT_SUCCESS);
 }

@@ -1,1 +1,1 @@
-use make to run mmap demo
+use make -s to run mmap demo

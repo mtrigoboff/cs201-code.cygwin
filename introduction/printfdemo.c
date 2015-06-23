@@ -27,14 +27,14 @@ int main (int argc, char **argv)
 
     printf("\nruler:\n");
     for (i = 0; i < 5; i++)
-        printf("%s", ruler);                        // print string, no return
-    printf("\n\n");                                 // now print return
+        printf("%s", ruler);	// print string, no return
+    printf("\n\n");				// now print return
     
     
     // printing integers
     
     i = 2345;
-    printf("%s%d\n", iHeader, i);                   // default integer format
+    printf("%s%d\n", iHeader, i);	// default integer format
         // note the use of TWO format specifiers, %s and %d
     
     // print number in field of width 8, right justified
@@ -54,7 +54,7 @@ int main (int argc, char **argv)
 
     // printing floating point numbers
     
-    printf("%s%f\n", piHeader, pi);                 // default format
+    printf("%s%f\n", piHeader, pi);		// default format
 
     // print number in field of width 8,
     // with 3 places to the right of the decimal point
@@ -64,7 +64,13 @@ int main (int argc, char **argv)
     printf("%s%.3f\n", piHeader, pi);
     
     // print number in field of width 12
-    printf("%s%12f\n", piHeader, pi);
+    printf("%s%12f\n\n", piHeader, pi);
+    
+	// print double precision floating point number
+    printf("%s%f\n", "printing a double float:    ", dpi);	// default format
+    
+    // print number in scientific notation
+    printf("the value of 10000 * pi is: %e\n\n", 10000 * pi);
     
     // use of asterisk in print format specifier:
     //     print number in field of width specified by w,
@@ -73,12 +79,6 @@ int main (int argc, char **argv)
     // to the right of the decimal point to be specified at run time,
     // instead of by a fixed value at compile time.
     printf("%s%*.*f\n\n", piHeader, w, r, pi);
-    
-    // print number in scientific notation
-    printf("the value of 10000 * pi is: %e\n\n", 10000 * pi);
-    
-	// print double precision floating point number
-    printf("%s%f\n", "printing a double precision float: ", dpi);                 // default format
     
     return 0;
 }

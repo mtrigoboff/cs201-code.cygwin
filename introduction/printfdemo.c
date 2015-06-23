@@ -47,8 +47,10 @@ int main (int argc, char **argv)
     printf("%s%-8i\n\n", iHeader, i);
     
     // printing an address
-    printf("address of ruler variable: 0x%08X\n\n",
+    printf("address of ruler variable: 0x%08X\n",
 		   (int) ruler);
+    printf("address of ruler variable: %8p\n\n",
+		   ruler);
 
     // printing floating point numbers
     
@@ -76,7 +78,7 @@ int main (int argc, char **argv)
     printf("the value of 10000 * pi is: %e\n\n", 10000 * pi);
     
 	// print double precision floating point number
-    printf("%s%lf\n", "printing a double precision float: ", dpi);                 // default format
+    printf("%s%f\n", "printing a double precision float: ", dpi);                 // default format
     
     return 0;
 }

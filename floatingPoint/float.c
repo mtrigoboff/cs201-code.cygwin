@@ -47,15 +47,8 @@ static double	prevValue = 0.0;
 // produce an integer whose rightmost n bits are 1
 static int concatNOnes(int n)
 {
-	int	 value = 0;
-	int	 i;
-
-	// concatenate n ones
-	for (i = 0; i < n; i++) {
-		value <<= 1;
-		value |= 1;
-		}
-	return value;
+	// concatenate n ones (does not work for n > 31)
+	return (1 << n) - 1;
 }
 
 static void setup()

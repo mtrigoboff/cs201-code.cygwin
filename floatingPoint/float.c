@@ -44,10 +44,10 @@ static double	prevValue = 0.0;
 
 // initial setup ---------------------------------------------------------------
 
-// produce an integer whose rightmost n bits are 1
-static int concatNOnes(int n)
+// create a mask whose rightmost n bits are 1
+static int createMask(int n)
 {
-	// concatenate n ones (does not work for n > 31)
+	// does not work for n > 31
 	return (1 << n) - 1;
 }
 
@@ -62,9 +62,9 @@ static void setup()
 
 	expBias = pow(2.0, expNBits - 1) - 1;
 
-	expMask = concatNOnes(expNBits);
+	expMask = createMask(expNBits);
 
-	fractMask = concatNOnes(fractNBits);
+	fractMask = createMask(fractNBits);
 
 	leftBitMask = 1 << (sizeof(int) * 8 - 1);
 

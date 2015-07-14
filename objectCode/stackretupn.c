@@ -5,14 +5,14 @@
 
 void fn(int depth, int skip)
 {
-    printf("fn(%d, %d) called\n", depth, skip);
+    printf("fn(%d) called\n", depth);
     if (depth == 1) {
         printf("hit bottom\n");
         }
     else
         fn(depth - 1, skip);
 
-    printf("fn(%d, %d) returning\n", depth, skip);
+    printf("fn(%d) returning\n", depth);
 
     if (depth == 1 && skip > 0) {
         printf("------------------\n");
@@ -44,9 +44,9 @@ int main(int argc, char **argv)
         printf("bad args\n");
         return -1;
         }
-    printf("main: calling fn(%d, %d)\n", depth, skip);
+    printf("main: calling fn with depth == %d, skip == %d\n", depth, skip);
     fn(depth, skip);
-    printf("main: fn(%d, %d) returned\n", depth, skip);
+    printf("main: fn(%d) returned\n", depth);
 
     return 0;
 }

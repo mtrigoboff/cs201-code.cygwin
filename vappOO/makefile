@@ -1,4 +1,4 @@
-include ~/bin/makeflags
+include ~/bin/makeflags_g++
 
 CC=g++
 LDFLAGS=-m32

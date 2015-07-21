@@ -1,9 +1,5 @@
 #include <stdio.h>
 
-// global so they can be accessed by gdb from any function
-static char    vendorStr[13];
-static char    brandStr[49];
-
 // test for presence of CPUID instruction by attempting to change bit 21 of EFLAGS
 // as described on page 7 of "Intel Processor Identification and the CPUID Instruction",
 // published by Intel
@@ -72,6 +68,8 @@ int main()
     unsigned int	max;
     unsigned int	extMax;
     int             hdrWidth = 32;
+	char			vendorStr[13];
+	char			brandStr[49];
 
     printf("\n");
     if (! cpuidAvailable()) {

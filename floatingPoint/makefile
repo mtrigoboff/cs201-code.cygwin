@@ -1,4 +1,4 @@
-include ~/bin/makeflags
+include ~/bin/makeflags_gcc
 
 CC=gcc
 LDFLAGS=-lm

@@ -3,10 +3,11 @@
 
 class Vehicle
 	{
-	protected:
-		char		name[30];
+	private:
 		int			nEngines;
+		char		name[16];
 
+	protected:
 		Vehicle(char *name, int nEngines);
 	
 	public:

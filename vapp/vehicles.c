@@ -54,13 +54,13 @@ static void printCarSpeed(VPtr v)
 
 static void printBoatSpeed(VPtr v)
 {
-    printf("speed:        %.2f knots\n",
+    printf("hull speed:   %.2f knots\n",
 		   1.34 * sqrt(v->vtsd.boat.length));
 }
 
 static void printPlaneSpeed(VPtr v)
 {
-    printf("speed:        %.2f mph\n",
+    printf("airspeed:     %.2f mph\n",
 		   20 * ((double) v->vtsd.plane.wingspan) / v->nEngines);
 }
 

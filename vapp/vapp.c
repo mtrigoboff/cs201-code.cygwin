@@ -9,8 +9,8 @@ int main()
 	// "constructor" calls
     vehicles[0] = newCar("Ford", 2000);
     vehicles[1] = newCar("Chevy", 3000);
-    vehicles[2] = newBoat("Old Ironsides", BT_SAIL, 0, 75);
-    vehicles[3] = newBoat("Sea Horse", BT_POWER, 1, 24);
+    vehicles[2] = newBoat("8 Ball", BT_SAIL, 0, 25);
+    vehicles[3] = newBoat("PT658", BT_POWER, 3, 78);
     vehicles[4] = newPlane("F-117", "Lockheed", 2, 50);
     vehicles[5] = newPlane("B-2", "Northrop-Grumman", 4, 125);
 

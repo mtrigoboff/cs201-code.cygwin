@@ -1,7 +1,7 @@
 #ifndef _VEHICLES_PRIV_
 #define _VEHICLES_PRIV_
 
-#define NAME_MAX_LGTH	20
+#define NAME_MAX_LGTH	7
 
 // private interface to the vehicles code
 

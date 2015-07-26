@@ -5,7 +5,7 @@ class Vehicle
 	{
 	private:
 		int			nEngines;
-		char		name[16];
+		char		name[8];
 
 	protected:
 		Vehicle(char *name, int nEngines);

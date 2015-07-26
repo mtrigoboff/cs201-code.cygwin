@@ -1,0 +1,13 @@
+include ~/bin/makeflags_gcc
+
+CC=gcc
+LDFLAGS=-m32 -lm
+
+vapp:		vapp.o vehicles.o vehicles.h
+
+vehicles.o:	vehicles.h vehicles_priv.h
+
+.PHONY:	x
+x:			# clean the directory
+			$(info -- cleaning the directory --)
+			rm -f *.o vapp

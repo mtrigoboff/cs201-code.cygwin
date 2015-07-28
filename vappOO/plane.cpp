@@ -3,7 +3,8 @@
 using namespace std;
 
 Plane::Plane(char *name, int nEngines, int wingSpan) :
-	Vehicle(name, nEngines)
+	Vehicle(name, nEngines),
+	wingSpan(wingSpan)
 {
 	this->wingSpan = wingSpan;
 }
@@ -20,5 +21,5 @@ void Plane::print(ostream& out)
 
 void Plane::printSpeed(ostream& out)
 {
-	out << 4.5 * wingSpan << " mph" << endl;
+	out << 20 * wingSpan / getNEngines() << " mph" << endl;
 }

@@ -4,10 +4,11 @@
 
 using namespace std;
 
-Boat::Boat(char *name, int nEngines, int length) :
-	Vehicle(name, nEngines)
+Boat::Boat(char *name, BoatType type, int nEngines, int length) :
+	Vehicle(name, nEngines),
+	length(length),
+	type(type)
 {
-	this->length = length;
 }
 
 Boat::~Boat(void)
@@ -17,7 +18,8 @@ Boat::~Boat(void)
 void Boat::print(std::ostream& out)
 {
 	Vehicle::print(out);
-	out << length << " feet" << endl;
+	out << (type == sail ? "sail" : type == power ? "power" : "amphibian") << endl
+		<< length << " feet" << endl;
 }
 
 void Boat::printSpeed(ostream& out)

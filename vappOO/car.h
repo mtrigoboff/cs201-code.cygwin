@@ -1,9 +1,8 @@
 #pragma once
 #include "vehicle.h"
 
-class Car :
-	public Vehicle
-	{
+class Car : public Vehicle
+{
 	private:
 		int		weight;
 		
@@ -12,4 +11,4 @@ class Car :
 		~Car(void);
 		void print(std::ostream& out);
 		void printSpeed(std::ostream& out);
-	};
+};

@@ -1,9 +1,8 @@
 #pragma once
 #include "vehicle.h"
 
-class Plane :
-	public Vehicle
-	{
+class Plane : public Vehicle
+{
 	private:
 		int		wingSpan;
 		
@@ -12,4 +11,4 @@ class Plane :
 		~Plane(void);
 		void print(std::ostream& out);
 		void printSpeed(std::ostream& out);
-	};
+};

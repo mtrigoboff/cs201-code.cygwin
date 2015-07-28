@@ -14,9 +14,16 @@ Vehicle::~Vehicle(void)
 {
 }
 
+int Vehicle::getNEngines(void)
+{
+	return nEngines;
+}
+
 void Vehicle::print(std::ostream& out)
 {
 	out << name << endl
-		<< nEngines << (nEngines > 1 ? " engines" : " engine")
+		<< nEngines
+		<< (nEngines > 1 || nEngines == 0 ?
+			" engines" : " engine")
 		<< endl;
 }

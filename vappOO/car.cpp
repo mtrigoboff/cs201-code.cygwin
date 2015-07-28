@@ -3,9 +3,9 @@
 using namespace std;
 
 Car::Car(char *name, int weight) :
-	Vehicle(name, 1)
+	Vehicle(name, 1),
+	weight(weight)
 {
-	this->weight = weight;
 }
 
 Car::~Car(void)

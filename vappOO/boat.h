@@ -1,15 +1,20 @@
 #pragma once
 #include "vehicle.h"
 
-class Boat :
-	public Vehicle
-	{
+typedef enum {
+	unknown, sail, power, amphibian
+	}
+BoatType;
+
+class Boat : public Vehicle
+{
 	private:
-		int		length;
+		int			length;
+		BoatType	type;	
 		
 	public:
-		Boat(char *name, int nEngines, int length);
+		Boat(char *name, BoatType type, int nEngines, int length);
 		~Boat(void);
 		void print(std::ostream& out);
 		void printSpeed(std::ostream& out);
-	};
+};

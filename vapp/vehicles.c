@@ -21,7 +21,7 @@ static VPtr newVehicle(VehicleType type, char *name, int nEngines)
 // the printNEngines implementation for Vehicle
 static void printNEngines(VPtr v)
 {
-    printf("nEngines:     %d\n", ((VPtr) v)->nEngines);
+    printf("nEngines:     %d\n", v->nEngines);
 }
 
 // print label for vehicle type

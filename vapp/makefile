@@ -3,7 +3,9 @@ include ~/bin/makeflags_gcc
 CC=gcc
 LDFLAGS=-m32 -lm
 
-vapp:		vapp.o vehicles.o vehicles.h
+vapp:		vapp.o vehicles.o
+
+vapp.o:		vehicles.h vehicles_priv.h
 
 vehicles.o:	vehicles.h vehicles_priv.h
 

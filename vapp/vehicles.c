@@ -24,7 +24,8 @@ static void printNEngines(VPtr v)
     printf("nEngines:     %d\n", ((VPtr) v)->nEngines);
 }
 
-void printType(VPtr v)
+// print label for vehicle type
+static void printType(VPtr v)
 {
     switch (v->type) {
         case VT_CAR:

@@ -1,6 +1,5 @@
 include ~/bin/makeflags_g++
 
-CC=g++
 LDFLAGS=-m32
 
 vappOO:		vappOO.o vehicle.o car.o boat.o plane.o

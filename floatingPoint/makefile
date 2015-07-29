@@ -1,7 +1,6 @@
 include ~/bin/makeflags_gcc
 
-CC=gcc
-LDFLAGS=-lm
+LDFLAGS = -lm
 
 float:
 

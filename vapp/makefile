@@ -1,7 +1,6 @@
 include ~/bin/makeflags_gcc
 
-CC=gcc
-LDFLAGS=-m32 -lm
+LDFLAGS = -m32 -lm
 
 vapp:		vapp.o vehicles.o
 

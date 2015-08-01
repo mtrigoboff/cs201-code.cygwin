@@ -15,7 +15,7 @@ int main (void)
 	vehicles[2] = new Boat((char*) "Pinta", BoatType::sail, 0, 60);
 	vehicles[3] = new Boat((char*) "PT658", BoatType::power, 3, 70);
 	vehicles[4] = new Plane((char*) "Boeing", 4, 150);
-	vehicles[5] = new Plane((char*) "Cessna", 1, 45);
+	vehicles[5] = new Plane((char*) "Cessna", 1, 35);
 
 	for (i = 0; i < 6; i++) {
 		vehicles[i]->print(cout);

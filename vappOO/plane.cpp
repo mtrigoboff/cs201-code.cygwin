@@ -21,5 +21,5 @@ void Plane::print(ostream& out)
 
 void Plane::printSpeed(ostream& out)
 {
-	out << 20 * wingSpan / getNEngines() << " mph" << endl;
+	out << 75 + wingSpan * getNEngines() << " mph" << endl;
 }

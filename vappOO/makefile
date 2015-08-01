@@ -1,6 +1,7 @@
 include ~/bin/makeflags_g++
 
-LDFLAGS=-m32
+# -lm is not required even though boat.cpp uses sqrt()
+# because you automatically get the math library in g++
 
 vappOO:		vappOO.o vehicle.o car.o boat.o plane.o
 

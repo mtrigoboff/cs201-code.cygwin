@@ -1,27 +1,20 @@
 // print times for execution of parent and children
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include <unistd.h>         // for fork()
 #include <sys/wait.h>       // for waitpid()
 #include <sys/times.h>      // for times()
 #include <time.h>           // for clock()
 
-void burntime(long long int n)
-{
-    long long int   x = 1;
-    long long int   i;
-    
-    // burn up time
-    for (i = 0; i < n; i++)
-        x *= i;     
-}
+void burnTime(int seconds, bool debug);
 
 int main(int argc, char **argv)
 {
-    int             status;
-    pid_t           pid;
-    long long int   n = argc > 1 ? atoll(argv[1]) : 3;       
+    int			status;
+    pid_t		pid;
+    int			seconds = argc > 1 ? atoi(argv[1]) : 3;       
                     // if arg[1] is present, use it as loop counter limit
 
     // time-related data
@@ -47,16 +40,16 @@ int main(int argc, char **argv)
 
     // code that runs in the child process
     else if (pid == 0) {
-        burntime(n);
-        printf("child:  looped %lld times\n", n);
+        burnTime(seconds, false);
+        printf("child:  burned %d seconds\n", seconds);
         return 212;
         }
 
     // code that runs in the parent process
     else {
         
-        burntime(n);
-        printf("parent: looped %lld times\n", n);
+        burnTime(seconds, false);
+        printf("parent: burned %d seconds\n", seconds);
         
         waitpid(pid, &status, 0);
         printf("parent: reaps child status 0x%08X\n", status);

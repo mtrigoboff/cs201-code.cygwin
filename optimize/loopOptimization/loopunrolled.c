@@ -1,19 +1,18 @@
 // a loop that has been unrolled
 
-#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+#include "iterations.h"
 
 int     a[100] = {0};
 
 int main(int argc, char** argv)
 {
-    int     n = 30000000;
-    int     i, j;
-    int     sum = 0;
+	int		i, j;
+	int		sum = 0;
+	clock_t	start = clock();
 
-    if (argc >= 2)
-        n = atoi(argv[1]);
-
-    for (i = 0; i < n; i++)
+    for (i = 0; i < ITERATIONS; i++)
         for (j = 0; j < 100; j += 4) {
             sum += a[j];
             sum += a[j + 1];
@@ -21,5 +20,8 @@ int main(int argc, char** argv)
             sum += a[j + 3];
             }
 
-    return sum;
+	printf("%.1f seconds\n",
+		   (double) (clock() - start) / CLOCKS_PER_SEC);
+
+	return sum;	// so optimizer will compile the code
 }

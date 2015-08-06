@@ -1,22 +1,24 @@
 // walks pointer through the array
 
-#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+#include "iterations.h"
 
 int     a[100] = {0};
 
 int main(int argc, char** argv)
 {
-    int     n = 30000000;
-    int     i;
-    int     *ptr;
-    int     sum = 0;
+	int		i;
+	int		*ptr;
+	int		sum = 0;
+	clock_t	start = clock();
 
-    if (argc >= 2)
-        n = atoi(argv[1]);
-
-    for (i = 0; i < n; i++)
+    for (i = 0; i < ITERATIONS; i++)
         for (ptr = a; ptr < &a[100]; ptr++)
             sum += *ptr;
 
-    return sum;
+	printf("%.1f seconds\n",
+		   (double) (clock() - start) / CLOCKS_PER_SEC);
+
+	return sum;	// so optimizer will compile the code
 }

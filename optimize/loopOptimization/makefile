@@ -1,36 +1,41 @@
 include ~/bin/makeflags_gcc
 
-all:				loop loopunrolled \
-						loopsplit ptrloop \
-						loop.opt loopunrolled.opt \
-						loopsplit.opt ptrloop.opt
-					touch all
+# LDFLAGS definition from makeflags_gcc is
+# redundant in this situation
 
-loop:				iterations.h
+LDFLAGS =
 
-loopunrolled:		iterations.h
+all:			loop loopunroll loopsplit loopptr \
+					loop.opt loopunroll.opt \
+					loopsplit.opt loopptr.opt
+				touch all
 
-loopsplit:			iterations.h
+loop:			iterations.h
 
-ptrloop:			iterations.h
+loopunroll:		iterations.h
 
-loop.opt:			iterations.h
+loopsplit:		iterations.h
 
-loopunrolled.opt:	iterations.h
+loopptr:		iterations.h
 
-loopsplit.opt:		iterations.h
+loop.opt:		iterations.h
 
-ptrloop.opt:		iterations.h
+loopunroll.opt:	iterations.h
+
+loopsplit.opt:	iterations.h
+
+loopptr.opt:	iterations.h
 
 .PHONY:	x
 x:
-					$(info -- cleaning directory --)
-					rm loop loopunrolled
-					rm loopsplit ptrloop
-					rm loop.opt loopunrolled.opt
-					rm loopsplit.opt ptrloop.opt
-					rm all
+				$(info -- cleaning directory --)
+				rm -f loop loopunroll
+				rm -f loopsplit loopptr
+				rm -f loop.opt loopunroll.opt
+				rm -f loopsplit.opt loopptr.opt
+				rm -f all
 
 # rule for building optimized executables
 %.opt : %.c
-					$(CC) $(CFLAGS) -O3 $< -o $@
+				$(CC) $(CFLAGS) -O3 $< -o $@
+

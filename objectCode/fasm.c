@@ -11,37 +11,37 @@
 // back into ST(0).
 double add1 (double x, double y)
 {
-    double  sum;
+	double	sum;
 
-    asm(                                // contents of fp stack:
-        "   fldl    %[x]        \n"     // x ...
-        "   fldl    %[y]        \n"     // y x ...
-        "   faddp               \n"     // sum ...
-        "   fstpl   %[sum]      \n"     // ...
+	asm(							// contents of fp stack:
+		"	fldl	%[x]		\n"	// x ...
+		"	fldl	%[y]		\n"	// y x ...
+		"	faddp				\n"	// sum ...
+		"	fstpl	%[sum]	 	\n"	// ...
 
-        :   [sum]   "=m"    (sum)       // outputs
-        :   [x]     "m"     (x),        // inputs
-            [y]     "m"     (y)
-    );
+		:	[sum]	"=m"	(sum)	// outputs
+		:	[x]		"m"		(x),	// inputs
+			[y]		"m"		(y)
+	);
 
-    return sum;
+	return sum;
 }
 
 // can be called with 2 command line arguments which will
 // then be interpreted as floating point numbers and added
 int main (int argc, char **argv)
 {
-    double  x = 1;
-    double  y = 2;
-    double  sum;
+	double	x = 1;
+	double	y = 2;
+	double	sum;
 
-    if (argc == 3) {
-        x = atof(argv[1]);
-        y = atof(argv[2]);
-        }
+	if (argc == 3) {
+		x = atof(argv[1]);
+		y = atof(argv[2]);
+		}
 
-    sum = add1(x, y);
-    printf("%.2f = add1(%.2f, %.2f)\n", sum, x, y);
+	sum = add1(x, y);
+	printf("%.2f = add1(%.2f, %.2f)\n", sum, x, y);
 
-    return 0;
+	return 0;
 }

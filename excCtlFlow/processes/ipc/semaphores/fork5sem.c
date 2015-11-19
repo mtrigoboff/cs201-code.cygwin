@@ -162,11 +162,13 @@ int main(int argc, char **argv)
 			}
 		}
 	printf("\n");
+	free(ts);
 	return 0;
 
 child: {
 	// code that runs in the child process
-	int			j;
+	int		j;
+	int		ret;
 
 	if (nAllowed > 0)
 		acquireSem(sid);
@@ -179,6 +181,8 @@ child: {
 		}
 	if (nAllowed > 0)
 		releaseSem(sid);
-	return ts[i].retVal;
+	ret = ts[i].retVal;
+	free(ts);
+	return ret;
 	}
 }

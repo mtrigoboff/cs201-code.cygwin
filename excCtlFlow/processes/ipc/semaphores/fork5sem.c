@@ -1,142 +1,184 @@
 // demonstrates multiple children which will cooperate using
 // a semaphore if a command-line argument is given
-// (argument is number of processes that can simultaneously "grab"
-//  the semaphore.  1 is a good argument to try with this code.)
+//
+// arguments
+//		1: the number of processes that can simultaneously "grab" the
+//		   semaphore. 2 is a good argument to try with this code.
+//		2: the number of "tick processes" to create
+//
+// If called with no arguments, child processes won't use semaphore.
 
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>         // for fork()
-#include <sys/wait.h>       // for waitpid()
-#include <sys/types.h>
+#include <unistd.h>			// for fork()
 #include <sys/ipc.h>
-#include <sys/sem.h>
+#include <sys/types.h>
+#include <sys/sem.h>		// for semaphore
+#include <sys/wait.h>		// for waitpid()
+
+// #define PRINT
 
 typedef struct {
-    char    ch;             // character to print
-    int     interval;       // seconds
-    int     nTimes;         // how many times to print ch
-    int     retVal;         // value to return
-    pid_t   pid;
-    }
+	char	ch;				// character to print
+	int		nTimes;			// how many times to print ch
+	int		retVal;			// value to return
+	pid_t	pid;
+	}
 TickSpecifier;
 
-TickSpecifier   ts[] = {{'+', 1, 4, 1, 0},
-                        {'-', 1, 6, 2, 0},
-                        {'!', 1, 8, 3, 0}};
+TickSpecifier *ts;			// pointer to array of tick proccess specifiers
 
-#define N_TICK_PROCESSES	sizeof(ts)/sizeof(TickSpecifier)
+// character for each process to print
+char tickChars[] = {'+', '-', '!', '$', '@', '.', ':', '^', '\\', '/'};
 
-static void semcall (int sid, int op)    /* call semop */
+void semcall(int sid, int op)    /* call Unix/Linux system call semop */
 {
-    struct sembuf sb;       // 1-element "array"
-    sb.sem_num = 0;         // operate on the first (and only) semaphore
-    sb.sem_op = op;         // number to add(subtract) to(from) semaphore value
-    sb.sem_flg = SEM_UNDO;  // will be undone if this process terminates
-    if (semop(sid, &sb, 1) == -1) {     // perform requested operation
-        printf ("Error in semop\n");
-        exit(-1);
-        }
+	// add op to the value of the semaphore
+	// (op may be negative, which will reduce the value)
+	struct sembuf sb;		// 1-element "array"
+	sb.sem_num = 0;			// operate on the first (and only) semaphore
+	sb.sem_op = op;			// number to add(subtract) to(from) semaphore value
+	sb.sem_flg = SEM_UNDO;	// will be undone if this process terminates
+	if (semop(sid, &sb, 1) == -1) {		// perform requested operation
+		printf("Error in semop\n");
+		exit(-1);
+		}
 }
 
-void initSem (int sid, int nAllowed)
+void initSem(int sid, int nAllowed)
 {
-    // initialize value of semaphore to nAllowed, which will allow
-    // that many processes to acquire this semaphore at the same time
-    semcall(sid, nAllowed);
+	// initialize value of semaphore to nAllowed, which will allow
+	// that many processes to acquire this semaphore at the same time
+	semcall(sid, nAllowed);
 }
 
-void acquireSem (int sid)
+void acquireSem(int sid)
 {
-    // value of semaphore must be > 0,
-    // otherwise this will wait until it is restored to > 0
-    // and then decrement it and acquire the semaphore
-    // for the calling process
-    semcall(sid, -1);
+	// value of semaphore must be > 0,
+	// otherwise this will wait until it is restored to > 0
+	// and then subtract 1 from it and acquire the semaphore
+	// for the calling process
+	semcall(sid, -1);
 }
 
-void releaseSem (int sid)
+void releaseSem(int sid)
 {
-    // restore value of semaphore to > 0,
-    // allowing some other process to acquire it
-    semcall(sid, 1);
+	// add 1 to the value of the semaphore,
+	// allowing some other process to acquire it
+	semcall(sid, 1);
 }
-     
-int main (int argc, char **argv)
+
+int main(int argc, char **argv)
 {
-    int     status;
-    pid_t   pid;
-    int     i;
+	int		status;
+	pid_t	pid;
+	int		i;
+	int		nTimes;
+	int		sid;
+	int		nAllowed =		-1;	// how many process at a time allowed in semaphore
+	int		nTickProcesses = 3;	// how many tick processes to create
+	bool	first;
 
-    int     sid;
-    int     nAllowed = 1;   // how many process at a time allowed in semaphore
+	// check validity of command line args 
+	if (argc > 1) {
+		nAllowed = atoi(argv[1]);
+		if (nAllowed < 1) {
+			printf("bad arg: %s\nneed a non-negative number to initialize semaphore\n",
+				   argv[1]);
+			return 1;
+			}
+		}
+	if (argc > 2) {
+		nTickProcesses = atoi(argv[2]);
+		if (nTickProcesses < 1) {
+			printf("bad arg: %s\nneed a non-negative number of tick processes\n",
+				   argv[2]);
+			return 2;
+			}
+		else if (nTickProcesses > sizeof(tickChars)) {
+			printf("bad arg: %s\nnumber of tick processes must be <= %d\n",
+				   argv[2], sizeof(tickChars));
+			return 3;
+			}
+		}
 
-    if (argc > 1)
-        nAllowed = atoi(argv[1]);
-    if (nAllowed < 1) {
-        printf("invalid argument: %s - requires a number > 0\n", argv[1]);
-        return 1;
-        }
+	// report whether or not children will be using the semaphore
+	printf("children will %sbe using semaphore", nAllowed > 0 ? "" : "not ");
+	if (nAllowed > 0)
+		printf(" with initial value %d", nAllowed);
+	printf("\n");
 
-    // create the semaphore
-    //
-    // IPC_PRIVATE means create a new semaphore each time this runs.
-    // Semaphores are "persistent", and this flag must be used to create
-    // a unique new one.  "man semget" states that IPC_PRIVATE was an
-    // unfortunate choice of name, and that IPC_NEW would have been better.
-    if ((sid = semget(IPC_PRIVATE, 1, 0600 | IPC_CREAT | IPC_EXCL)) == -1) {
-        printf ("couldn't get semaphore\n");
-        exit(-1);
-        }
-    initSem(sid, nAllowed);
-    printf("semaphore initial value: %d\n", nAllowed);
+	// create the semaphore
+	//
+	// IPC_PRIVATE means create a new semaphore each time this runs.
+	// Semaphores are "persistent", and this flag must be used to create
+	// a unique new one.  "man semget" states that IPC_PRIVATE was an
+	// unfortunate choice of name, and that IPC_NEW would have been better.
+	if ((sid = semget(IPC_PRIVATE, 1, 0600 | IPC_CREAT)) == -1) {
+		printf ("couldn't get semaphore\n");
+		exit(-1);
+		}
 
-    for (i = 0; i < N_TICK_PROCESSES; i++) {
-        pid = fork();
-        if (pid == 0)
-            goto child;
-        else {
-            ts[i].pid = pid;    // this might be < 0 if fork() error
-            printf("forked pid %d with ch '%c', interval %d, nTimes %d\n",
-                    pid, ts[i].ch, ts[i].interval, ts[i].nTimes);
-            }
-        }
+	// create the tick process specifier array
+	//   start with tick character '!' - add one to get ascii character for next process
+	ts = malloc(nTickProcesses * sizeof(TickSpecifier));
+	printf("%d processes: ", nTickProcesses);
+	first = true;
+	for (i = 0, nTimes = 4; i < nTickProcesses; i++, nTimes += 2) {
+		ts[i].ch = tickChars[i];
+		ts[i].nTimes = nTimes;
+		ts[i].retVal = i + 1;
+		printf("%s'%c' %d times", first ? "" : ", ", ts[i].ch, ts[i].nTimes);
+		first = false;
+		}
+	printf("\n");
 
-    // report whether or not children are using the semaphore
-    printf("children are %susing semaphore\n", argc > 1 ? "" : "not ");
-    
-    printf("parent %d waiting\n", getpid());
-    getchar();
-    for (i = 0; i < N_TICK_PROCESSES; i++) {
-        printf("killing %d\n", ts[i].pid);
-        pid = ts[i].pid;
-        if (pid > 0) {
-            kill(pid, SIGKILL);
-            if (waitpid(pid, &status, WUNTRACED) > 0) {
-                printf("parent reaps child %d status 0x%08X\n", pid, status);
-                if (WIFEXITED(status))
-                    printf("child exited normally with %d\n",
-                            WEXITSTATUS(status));
-                else if (WIFSIGNALED(status))
-                    printf("child exited with uncaught signal %d\n",
-                            WTERMSIG(status));
-                }
-            }
-        }
-    return 0;
+	for (i = 0; i < nTickProcesses; i++) {
+		pid = fork();
+		if (pid == 0)
+			goto child;
+		else {
+			ts[i].pid = pid;	// this might be < 0 if fork() error
+			#ifdef PRINT
+			printf("forked pid %d with ch '%c', nTimes %d\n",
+				pid, ts[i].ch, ts[i].nTimes);
+			#endif
+			}
+		}
+
+	// if semaphore will be used,
+	//     children can't start until it is initialized
+	if (nAllowed > 0)
+		initSem(sid, nAllowed);
+
+	for (i = 0; i < nTickProcesses; i++) {
+		pid = ts[i].pid;
+		if (pid > 0) {
+			#ifdef PRINT
+			printf("\nabout to wait for pid %d\n", pid);
+			#endif
+			waitpid(pid, &status, 0);
+			}
+		}
+	printf("\n");
+	return 0;
 
 child: {
-    // code that runs in the child process
-    int         j;
-    sleep(3);
-    if (argc > 1)
-        acquireSem(sid);
-    for (j = 0; j < ts[i].nTimes; j++) {
-        printf("%c", ts[i].ch);
-        fflush(stdout);
-        sleep(ts[i].interval);
-        }
-    if (argc > 1)
-        releaseSem(sid);
-    return ts[i].retVal;
-    }
+	// code that runs in the child process
+	int			j;
+
+	if (nAllowed > 0)
+		acquireSem(sid);
+	else
+		sleep(1);	// give parent time to print status info
+	for (j = 0; j < ts[i].nTimes; j++) {
+		printf("%c", ts[i].ch);
+		fflush(stdout);
+		sleep(1);
+		}
+	if (nAllowed > 0)
+		releaseSem(sid);
+	return ts[i].retVal;
+	}
 }

@@ -4,7 +4,7 @@ char	charArray[] =	{0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
 						 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F};
 int		intArray[] =	{10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	int		localVar =	0x12345678;
 	double	fpVar =		16.0;
@@ -56,8 +56,8 @@ int main (int argc, char **argv)
 		: [localVarOut]		"=m"	(localVar),		// outputs
 		  [fpVarOut]		"=m"	(fpVar)
 		: [localVarIn]		"m"		(localVar),		// inputs
-		  [intArray]		"m"		(intArray[0]),
-		  [charArray]		"m"		(charArray[0]),
+		  [intArray]		"m"		(intArray),
+		  [charArray]		"m"		(charArray),
 		  [fpVarIn]			"m"		(fpVar)
 		: "eax", "ebx", "ecx"						// clobbers
 	);

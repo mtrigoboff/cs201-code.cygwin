@@ -9,7 +9,7 @@
 // the assembly code stores value from ST(0) to sum,
 // then the return code loads the value from sum
 // back into ST(0).
-double add1 (double x, double y)
+double add1(double x, double y)
 {
 	double	sum;
 
@@ -29,7 +29,7 @@ double add1 (double x, double y)
 
 // can be called with 2 command line arguments which will
 // then be interpreted as floating point numbers and added
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	double	x = 1;
 	double	y = 2;

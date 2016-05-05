@@ -6,7 +6,7 @@
 
 int fn(int x, int y, int z)
 {
-    int     m;
+    int     m = 3;
     int     n;
     
     m = x;

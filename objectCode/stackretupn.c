@@ -26,7 +26,7 @@ void fn(int depth, int skip)
             "       ret                         \n"
             :                                   // outputs
             :   [skip]  "m"     (skip)          // inputs
-            :   "esp", "ecx"             // clobbers
+            :   "esp", "ecx"                    // clobbers (can't list ebp)
         );
         }
 }

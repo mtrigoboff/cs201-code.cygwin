@@ -36,7 +36,9 @@ int main(int argc, char **argv)
     if (argc > 1)
         denominator = atof(argv[1]);
 
-    printf("about to divide %.2f by %.2f\n", numerator, denominator);
+    printf("about to divide %.2f by %.2f - hit return when ready",
+		   numerator, denominator);
+	getchar();
     quotient = numerator / denominator;     // perform the division
     if (! err)
         printf("quotient = %.2f\n", quotient);  // print result, if we get here

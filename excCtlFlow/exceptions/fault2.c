@@ -25,7 +25,9 @@ int main(int argc, char **argv)
     if (argc > 1)
         denominator = atoi(argv[1]);
     
-    printf("about to divide %d by %d\n", numerator, denominator);
+    printf("about to divide %d by %d - hit return when ready",
+		   numerator, denominator);
+	getchar();
     x = numerator / denominator;
     if (! err)
         printf("x = %d\n", x);

@@ -10,7 +10,7 @@ void printBytes (char *p, int nBytes)
     
     printf("bytes: ");
     for (i = 0; i < nBytes; i++, p++)
-        printf("%02X", *p);
+        printf("%02X", (unsigned char) *p);
     printf("\n");
 }
 

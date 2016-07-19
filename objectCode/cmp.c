@@ -2,7 +2,7 @@
 
 #pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 
-int main ()
+int main (int argc, char **argv)
 {
     int             s1 = 0, s2 = 0;
     unsigned int    u1 = 0, u2 = 0;
@@ -28,8 +28,6 @@ int main ()
 
     // compare variable with hex constant
 
-    // these both compile as unsigned compare,
-    // even though s1 is a signed variable
     if (s1 >= 0x80000004)
         x = 0;
     if (s1 >= -3)
@@ -37,11 +35,11 @@ int main ()
     if (s1 >= 0xFFFFFFFD)       // hex for -3
         x = 0;
 
-    // this generates a warning, compiles as unsigned compare
+    // this doesn't compile into any object code, because the
+	// maximum possible value for a signed int is 2147483647
     if (s1 >= 2147483652)       // decimal for 0x80000004
         x = 0;
 
-	// this does not generate a warning
     if (u1 >= 2147483652)       // decimal for 0x80000004
         x = 0;
 

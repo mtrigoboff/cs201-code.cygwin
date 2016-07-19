@@ -4,11 +4,11 @@
 
 int main (int argc, char **argv)
 {
-    int     array[] = {1, 2, 3, 4};
+    int     ar[] = {1, 2, 3, 4};
     int     sum = 0;
     int     *p;
     
-    for (p = array; p < &array[sizeof(array)/sizeof(int)]; p++)
+    for (p = ar; p < &ar[sizeof(ar)/sizeof(int)]; p++)
         sum += *p;
     
     printf("sum = %d\n", sum);

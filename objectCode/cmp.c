@@ -36,7 +36,7 @@ int main (int argc, char **argv)
         x = 0;
 
     // this doesn't compile into any object code, because the
-	// maximum possible value for a signed int is 2147483647
+	// maximum possible value for a signed int is 2,147,483,647
     if (s1 >= 2147483652)       // decimal for 0x80000004
         x = 0;
 

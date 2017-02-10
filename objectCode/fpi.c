@@ -1,10 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-#define WIDTH       40
-#define PRECISION   38
+#define PRECISION   14
 
 // this function gets the value of pi from the FPU
-double pi ()
+double pi()
 {
     double dpi;
 
@@ -17,9 +17,16 @@ double pi ()
     return dpi;
 }
 
-int main (void)
+int main(int argc, char** argv)
 {
-    printf("pi = %16.14f\n", pi());
+	int		precision = PRECISION;
+
+	if (argc > 1) {
+		precision = atoi(argv[1]);
+		precision = precision == 0 ? PRECISION : precision;
+		}
+
+    printf("pi = %*.*f\n", precision + 2, precision, pi());
 
     return 0;
 }

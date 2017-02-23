@@ -1,10 +1,11 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 // test for presence of CPUID instruction by attempting to change bit 21 of EFLAGS
 // as described on page 7 of "Intel Processor Identification and the CPUID Instruction",
 // published by Intel
 //
-int cpuidAvailable()
+bool cpuidAvailable()
 {
     int     eflags1, eflags2;
     int     bitMask21 = 1 << 21;                    // mask for bit 21

@@ -26,8 +26,8 @@ int main(int argc, char **argv)
 
 		// extended asm
 		"		mov		%[localVarIn], %%eax		\n" // store localVar into eax
-		"		add		$4, %%eax					\n" // set register
-		"		mov		%%eax, %[localVarOut]		\n" // add register to localVar
+		"		add		$4, %%eax					\n" // add 4 to eax
+		"		mov		%%eax, %[localVarOut]		\n" // copy register to localVar
 
 		// int array
 		"		mov		$3, %%ecx					\n" // initialize ecx

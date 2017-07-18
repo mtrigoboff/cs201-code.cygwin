@@ -12,12 +12,9 @@ int main(int argc, char** argv)
 	float	f;
 	int		nParsed;
 
-	if (argc > 1 && strcmp(argv[1], "-help") == 0) {
-		printf("Type hex to see equivalent float.\n");
-		printf("Type float to see equivalent hex.\n");
-		printf("Type a zero value of either kind to exit.\n\n");
-		return 1;
-		}
+	printf("Type hex starting with \"0x\" to see equivalent float.\n");
+	printf("Type float to see equivalent hex.\n");
+	printf("Type a zero value of either kind to exit.\n\n");
 	for (;;) {
 		printf(": ");
 		scanf("%15s", str);

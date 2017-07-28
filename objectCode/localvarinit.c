@@ -3,9 +3,9 @@
 
 int fn()
 {
-   int		x = 0xDDDDDDDD;
-   int		y = 0xEEEEEEEE;
-   int		z = 0xFFFFFFFF;
+   int		d = 0xDDDDDDDD;
+   int		e = 0xEEEEEEEE;
+   int		f = 0xFFFFFFFF;
 
     // fill array with new character
 	asm("	cld								\n"		// set to increment
@@ -21,7 +21,7 @@ int fn()
 		:	"eax", "ecx", "edi"				// clobbers
 	);
 
-	return x + y + z;
+	return d + e + f;
 	// need to return this to avoid unused variable warning,
 	// and to keep local vars from being optimized out of existence
 }

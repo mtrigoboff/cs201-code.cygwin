@@ -27,7 +27,7 @@ int main (int argc, char **argv)
     else {
         // code that runs in the parent process
         printf("parent waiting\n");
-        if (waitpid(pid, &status, 0) > 0) {
+        if (waitpid(pid, &status, 0)) {
             printf("parent reaps child status 0x%08X\n", status);
             if (WIFEXITED(status))
                 printf("child exited normally with %d\n", WEXITSTATUS(status));

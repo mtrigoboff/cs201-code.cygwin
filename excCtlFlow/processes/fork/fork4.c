@@ -37,7 +37,7 @@ int main (int argc, char **argv)
         printf("parent sleeps for %d sec\n", parentWait);
         sleep(parentWait);      // seconds
         printf("parent calls waitpid\n");
-        if (waitpid(pid, &status, WNOHANG) > 0) {
+        if (waitpid(pid, &status, WNOHANG)) {
             printf("parent reaps child status 0x%08X\n", status);
             if (WIFEXITED(status))
                 printf("child exited normally with %d\n", WEXITSTATUS(status));

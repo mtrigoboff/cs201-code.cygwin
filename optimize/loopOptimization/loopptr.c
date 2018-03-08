@@ -1,5 +1,7 @@
 // walks pointer through the array
 
+#pragma GCC diagnostic ignored "-Wmisleading-indentation"
+
 #include <stdio.h>
 #include <time.h>
 #include "iterations.h"

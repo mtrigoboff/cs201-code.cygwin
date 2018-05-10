@@ -1,4 +1,4 @@
-// handles divide by zero floating point error
+// fails to handle divide by zero floating point error
 
 #include <signal.h>
 #include <stdlib.h>

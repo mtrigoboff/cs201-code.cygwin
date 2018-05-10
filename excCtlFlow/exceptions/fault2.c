@@ -1,4 +1,4 @@
-// handle divide by zero fault competently
+// failed attempt to handle divide by zero fault
 
 #include <signal.h>
 #include <stdlib.h>

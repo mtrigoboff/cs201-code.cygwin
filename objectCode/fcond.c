@@ -19,6 +19,8 @@ int main (int argc, char **argv)
     // set up demonstration of unordered result
     if (x == 0.0 && y == 0.0)
         x = 0.0/0.0;            // this is a NaN
+    else if (x == 1.0 && y == 0.0)
+        x = 1.0/0.0;            // this is Infinity
     
     if (x < y)
         printf("x < y\n");

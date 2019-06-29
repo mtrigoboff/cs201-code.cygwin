@@ -10,6 +10,7 @@ int main(int argc, char** argv)
 {
 	int		i;
 	short	s;
+	char	c;
 	int		nParsed;
 
 	printf("type a 4-byte hex value to the %% prompt -- type 0 to end\n");
@@ -21,7 +22,8 @@ int main(int argc, char** argv)
 				break;
 			else {
 				s = i;
-				printf("%X -> %hX\n", i, s);
+				c = i;
+				printf("%08X -> %04hX, %02hhX\n", i, s, c);
 				}
 		else {
 			eatLine();

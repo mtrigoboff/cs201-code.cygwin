@@ -53,12 +53,12 @@ bool strequal(char *s1, char *s2)
 	"		mov		%[s2], %%edi		\n"	// edi points to s2
 	" next:	cmp		$0, (%%esi)			\n"	// end of s1?
 	"		je		end1				\n"	
-	"		cmp		$0, (%%edi)			\n"	// end of s2?
+	"		cmpb	$0, (%%edi)			\n"	// end of s2?
 	"		je		ne					\n"	// end of s2, but not s1
 	"		cmpsb						\n"	// compare chars, increment esi and edi
 	"		jne		ne					\n"	// found unequal chars
 	"		jmp		next				\n"	
-	" end1:	cmp		$0, (%%edi)			\n"	// end of s2?
+	" end1:	cmpb	$0, (%%edi)			\n"	// end of s2?
 	"		je		eq					\n"	// end of s1 and s2
 	"		jmp		ne					\n"	
 	" eq:	movl	$1, %[result]		\n"

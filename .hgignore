@@ -1,11 +1,7 @@
 syntax: regexp
 
-# The intent of this regular expression was to ignore all executable files.
-# Unfortunately, it ignores a lot more because it also matches directory names,
-# and hg will then ignore everything in or below that directory.
-#
-# But even though it doesn't do what I want, it's useful so that hg stat doesn't
-# print a long list of files that it isn't tracking, which I know about and don't
-# care about.
-
-^[a-zA-z0-9]+$
+.*[^.][^c]$
+.*prev.*
+excCtlFlow/exceptions/experiments/.*
+excCtlFlow/processes/ipc/semaphores/old.c
+optimize/loopOptimization/misc/test/.*

@@ -14,6 +14,7 @@ int fn()
 		"	mov     	%%ebp, %%ecx		\n"
 		"	sub     	%%esp, %%ecx		\n"
 		"	shr     	$2, %%ecx			\n"
+		"	sub     	$1, %%ecx			\n"
 		"	rep stosl						\n"
 
 		:									// outputs

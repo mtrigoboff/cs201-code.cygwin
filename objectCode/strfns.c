@@ -51,7 +51,7 @@ bool strequal(char *s1, char *s2)
 	"		cld							\n"	// set to increment esi and edi
 	"		mov		%[s1], %%esi		\n"	// esi points to s1
 	"		mov		%[s2], %%edi		\n"	// edi points to s2
-	" next:	cmp		$0, (%%esi)			\n"	// end of s1?
+	" next:	cmpb	$0, (%%esi)			\n"	// end of s1?
 	"		je		end1				\n"	
 	"		cmpb	$0, (%%edi)			\n"	// end of s2?
 	"		je		ne					\n"	// end of s2, but not s1

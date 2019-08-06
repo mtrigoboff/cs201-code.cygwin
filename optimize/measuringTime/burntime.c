@@ -17,8 +17,8 @@ void burnTime(int seconds, bool debug)
 		}
 
 	if (debug)		// print debugging info
-		printf("seconds: %d, startTime: %lu, stopTime: %lu "
-			   "CLOCKS_PER_SEC: %lu\n",
+		printf("seconds: %d, startTime: %lu, stopTime: %lu"
+			   ", CLOCKS_PER_SEC: %lu\n",
 			   seconds, startTime, stopTime, CLOCKS_PER_SEC);
 
 	// burn up time

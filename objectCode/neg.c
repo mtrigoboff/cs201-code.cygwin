@@ -1,10 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 // demonstrates three different ways to generate
 // the negative of a two's complement integer value
-int main (void)
+int main (int argc, char** argv)
 {
-    int     x = 3;
+    int     x = argc == 1 ? 3 : atoi(argv[1]);
 
     printf("x = %d\n", x);
 

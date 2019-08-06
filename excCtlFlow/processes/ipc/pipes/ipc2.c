@@ -5,7 +5,6 @@
 #include <unistd.h>         // for fork(), sleep(), pipe()
 #include <sys/wait.h>       // for waitpid()
 
-static char     line[256];
 static int      comm[2];
 static char     stopCmd = 'x';
 
@@ -48,7 +47,7 @@ int main ()
     else {
         close(comm[0]);         // parent doesn't need input side of pipe
         printf("parent waiting\n");
-        gets(line);
+        getchar();
         write(comm[1], &stopCmd, 1);
         printf("parent tells child to stop\n");
         waitpid(pid, &status, 0);

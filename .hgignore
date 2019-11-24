@@ -1,7 +1,0 @@
-syntax: regexp
-
-.*[^.][^c]$
-.*prev.*
-excCtlFlow/exceptions/experiments/.*
-excCtlFlow/processes/ipc/semaphores/old.c
-optimize/loopOptimization/misc/test/.*

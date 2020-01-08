@@ -1,46 +1,62 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 // consume rest of line in the input stream
-void eatLine ()
+void eatLine()
 {
     while (getchar() != '\n') ;
 }
 
-int main (int argc, char **argv)
+bool getNumber(char* str, char* formatStr, void* n)
 {
-    int     nParsed;
+	char	trailing;
+
+	return sscanf(str, formatStr, n, &trailing) == 1;
+}
+
+#define MAX_STR_LGTH		20
+static char* strFormatSpec = "%20s";
+
+int main(int argc, char **argv)
+{
+	int		nParsed;
     int     n;
     float   f;
-    char    str[8 + 1];             // room for string of length <= 8
-                                    // (includes string termination character)
-    printf("scanf demo\n\n");
+    char    str[MAX_STR_LGTH + 1];
+	          // room for string of length <= MAX_STR_LGTH
+              // (includes string termination character)
+
+    printf("scanf demo 2\n\n");
     
     // don't forget to put the & in front of the name of the variable.
     // REALLY BAD THINGS happen when you forget to do that!
     
     printf("type a decimal number: ");
-    nParsed = scanf("%d", &n);
-    if (nParsed != 1)               // check we parsed all the items requested
+	scanf(strFormatSpec, str); 
+    if (! getNumber(str, "%d %c", &n)) {
+        eatLine();
         printf("error!\n\n");
+        }
     else
         printf("you typed %d\n\n", n);
-    eatLine();
 
     printf("type a floating point number: ");
-    nParsed = scanf("%f", &f);
-    if (nParsed != 1)               // check we parsed all the items requested
+	scanf(strFormatSpec, str); 
+    if (! getNumber(str, "%f %c", &f)) {
+        eatLine();
         printf("error!\n\n");
+        }
     else
         printf("you typed %f\n\n", f);
-    eatLine();
     
     printf("type a hex number: ");
-    nParsed = scanf("%x", &n);
-    if (nParsed != 1)               // check we parsed all the items requested
+	scanf(strFormatSpec, str); 
+    if (! getNumber(str, "%x %c", &n)) {
+        eatLine();
         printf("error!\n\n");
+        }
     else
         printf("you typed 0x%08X\n\n", n);
-    eatLine();
     
     printf("type a string: ");
     nParsed = scanf("%8s", str);    // read in string of length <= 8

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     printf("there are %d args\n", argc);
     for (int i = 0; i < argc; i++)

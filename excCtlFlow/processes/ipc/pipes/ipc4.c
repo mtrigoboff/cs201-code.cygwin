@@ -58,13 +58,13 @@ int main()
         for (;;) {
 			int		readRet;
 			
+            printf("%c", '.');
+            fflush(stdout);     // override line buffering so we see single char output
 			readRet = read(comm[0], &cmd, 1);
 			if (readRet == -1 && errno == EAGAIN)
 				sleep(1);
 			else
 				break;
-            printf("%c", '.');
-            fflush(stdout);     // override line buffering so we see single char output
         	}
 
         close(comm[0]);

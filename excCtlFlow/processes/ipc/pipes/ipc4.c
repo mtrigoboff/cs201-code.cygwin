@@ -1,4 +1,7 @@
-// achieves inter-process communication using a pipe
+// achieves inter-process communication using a pipe and fcntl()
+//
+// Thanks to Winter 2020 student Charlie Hall for pointing out
+// that fcntl() could be used for this.
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -38,7 +41,7 @@ int main()
 		{
 		int		fdFlags;
 		
-		fdFlags = fcntl(comm[0], F_GETFD);
+		fdFlags = fcntl(comm[0], F_GETFL);
 		fdFlags |= O_NONBLOCK;
 		fcntl(comm[0], F_SETFL, fdFlags);
 		}

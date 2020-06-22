@@ -84,11 +84,11 @@ int main(int argc, char **argv)
             }
 
         // compute execution time based on data from clock()
-        if (clockStop > clockStart)            // time didn't wrap around
+        if (clockStop > clockStart) {          // time didn't wrap around
             clockTotal = clockStop - clockStart;
             printf("\nclock(3) time: %lu ticks, %f seconds, CLOCKS_PER_SEC %lu\n",
                    clockTotal, ((double) clockTotal) / CLOCKS_PER_SEC, (clock_t) CLOCKS_PER_SEC);
-        
+        	}
         return 0;
         }
 }

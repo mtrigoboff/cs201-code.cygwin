@@ -29,6 +29,7 @@ int main (int argc, char **argv)
     uval = unsigned32MaxValue * unsigned32MaxValue;
     
     // a normal division that works correctly
+	// (instruction shown in gdb as cltd is cwd/cdq in the IA-32 manual)
     val = x / y;
 
     // the variables being used are unsigned,

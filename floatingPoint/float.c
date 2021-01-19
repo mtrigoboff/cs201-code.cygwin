@@ -116,8 +116,8 @@ static void printValue(int n)
 	printf("0x%-*.*X =  ", nHexChars, nHexChars, n);
 
 	// break down behavior based on values of exponent, fraction
-	if (expBits == 0) {					 // zero or denormalized
-		if (fractBits == 0) {				   // zero
+	if (expBits == 0) {					// zero or denormalized
+		if (fractBits == 0) {				// zero
 			printSpecialValue(signBit ? "-zero" : "+zero");
 			prevValue = 0.0;
 			return;

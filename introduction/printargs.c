@@ -4,7 +4,7 @@
 
 int main(int argc, char** argv)
 {
-	if (strcmp(argv[0], "pa") != 0) {			// argv[0] != "pa"
+	if (strcmp(argv[0], "pa") != 0) {			// argv[0] not equal to "pa"
 		
 		// detailed output
 
@@ -13,7 +13,7 @@ int main(int argc, char** argv)
 			printf("%d: \"%s\"\n", i, argv[i]);
 		}
 
-	else {
+	else {										// argv[0] equal to "pa"
 		
 		// short output
 		

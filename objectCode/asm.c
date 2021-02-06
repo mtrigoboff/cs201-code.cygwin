@@ -1,7 +1,6 @@
 // demo of GCC inline assembler
 
-char	charArray[] =	{0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
-						 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F};
+char	charArray[] =	{'a', 'b', 'c', 'd', 'e'};
 int		intArray[] =	{10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
 
 int main(int argc, char **argv)

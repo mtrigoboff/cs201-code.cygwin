@@ -96,23 +96,19 @@ int main ()
         printf("%-50s %s\n", "SSE feature:",  (features & SSE_FLAG) ?   "present" : "absent");
         printf("%-50s %s\n", "SSE2 feature:", (features & SSE2_FLAG) ?  "present" : "absent");
 
-        // check for Pentium 4 or later
-        if (versionInfo & PENTIUM4_FLAG) {
-            printf("\nprocessor is Pentium 4 or later\n");
-            cpuid(0x80000000, (int *) &extMax, 0, 0, 0);
-            printf("%-50s 0x%08X\n", "  maximum value for EAX in extended CPUID call:", extMax);
+		cpuid(0x80000000, (int *) &extMax, 0, 0, 0);
+		printf("\n%-50s 0x%08X\n\n", "maximum value for EAX in extended CPUID call: ", extMax);
 
-            // get brand string, if available
-            if (extMax >= 0x80000004) {
-                unsigned int    arg;
-                int             i;
-                int             brandStr[12];
+		// get brand string, if available
+		if (extMax >= 0x80000004) {
+			unsigned int    arg;
+			int             i;
+			int             brandStr[12];
 
-                for (arg = 0x80000002, i = 0; arg <= 0x80000004; arg++, i += 4)
-                    cpuid(arg, &brandStr[i], &brandStr[i + 1], &brandStr[i + 2], &brandStr[i + 3]);
-                printf("  brand string: \"%s\"\n", (char *) brandStr);
-                }
-            }
+			for (arg = 0x80000002, i = 0; arg <= 0x80000004; arg++, i += 4)
+				cpuid(arg, &brandStr[i], &brandStr[i + 1], &brandStr[i + 2], &brandStr[i + 3]);
+			printf("brand string:\n\"%s\"\n", (char *) brandStr);
+			}
         }
 
     return 0;

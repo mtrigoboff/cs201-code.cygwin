@@ -8,7 +8,7 @@ int main (int argc, char **argv)
     double      sum;
     
     if (argc != 3) {        // check that we have 2 arguments
-        printf("need 2 numeric arguments!\n");
+        printf("2 numeric arguments required!\n");
         return -1;
         }
     

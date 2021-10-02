@@ -8,5 +8,8 @@
 !*.h
 !*.c
 
+# unignore Markdown files
+!*.md
+
 # unignore .gitignore
 !.gitignore

@@ -28,7 +28,7 @@ int main (int argc, char **argv)
     printf("\nruler:\n");
     for (i = 0; i < 5; i++)
         printf("%s", ruler);	// print string, no return
-    printf("\n\n");				// now print return
+    printf("\n\n");				// skip lines
     
     
     // printing integers

@@ -8,27 +8,26 @@ void fn(int depth, int skip)
     printf("fn(%d) called\n", depth);
     if (depth == 1) {
         printf("hit bottom\n");
-        }
+		if (skip > 0) {
+			printf("------------------\n");
+			// follow stack frame pointer links to chosen stack frame,
+			// then return from that stack frame to its caller
+			asm("       mov     %[skip], %%ecx      \n"
+				"next:  mov     (%%ebp), %%ebp      \n"
+				"       loop    next                \n"
+				"       mov     %%ebp, %%esp        \n"
+				"       pop     %%ebp               \n"
+				"       ret                         \n"
+				:                                   // outputs
+				:   [skip]  "m"     (skip)          // inputs
+				:   "esp", "ecx"                    // clobbers (can't list ebp)
+			);
+			}
+		}
     else
         fn(depth - 1, skip);
 
     printf("fn(%d) returning\n", depth);
-
-    if (depth == 1 && skip > 0) {
-        printf("------------------\n");
-        // follow stack frame pointer links to chosen stack frame,
-        // then return from that stack frame to its caller
-        asm("       mov     %[skip], %%ecx      \n"
-            "next:  mov     (%%ebp), %%ebp      \n"
-            "       loop    next                \n"
-            "       mov     %%ebp, %%esp        \n"
-            "       pop     %%ebp               \n"
-            "       ret                         \n"
-            :                                   // outputs
-            :   [skip]  "m"     (skip)          // inputs
-            :   "esp", "ecx"                    // clobbers (can't list ebp)
-        );
-        }
 }
 
 int main(int argc, char **argv)

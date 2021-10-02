@@ -9,7 +9,7 @@ int main (int argc, char **argv)
     double      x;
     double      y;
     
-    if (argc >= 2) {
+    if (argc >= 3) {
         x = atof(argv[1]);
         y = atof(argv[2]);
         }

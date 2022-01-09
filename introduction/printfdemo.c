@@ -9,9 +9,15 @@ int main (int argc, char **argv)
     char	ch = '$';
     float   pi = 3.1415928;
     double  dpi = 3.1415928;
+
+	// 4-byte integers
     int     i = 5;
     int     w = 12, r = 8;
     
+	// 2-byte integers
+	signed short	ss;		// 'signed' is assumed if not specified
+	unsigned short	us;
+
     printf("Demo of the printf function\n\n");
 
     // printing a character
@@ -30,8 +36,7 @@ int main (int argc, char **argv)
         printf("%s", ruler);	// print string, no return
     printf("\n\n");				// skip lines
     
-    
-    // printing integers
+    // printing 4-byte integers
     
     i = 2345;
     printf("%s%d\n", iHeader, i);	// default integer format
@@ -45,6 +50,18 @@ int main (int argc, char **argv)
     
     // print number in field of width 8, left justified
     printf("%s%-8i\n\n", iHeader, i);
+
+    // printing 2-byte integers (note use of 'h' in format specifier)
+	
+	ss = 1000;
+	printf("signed short:   %6hd, 0x%04hX\n", ss, ss);
+	ss = -1;
+	printf("signed short:   %6hd, 0x%04hX\n", ss, ss);
+    
+	us = 1000;
+	printf("unsigned short: %6hu, 0x%04hX\n", us, us);
+	us = 65535;
+	printf("unsigned short: %6hu, 0x%04hX\n\n", us, us);
     
     // printing an address
     printf("address of ruler variable: 0x%08X\n",

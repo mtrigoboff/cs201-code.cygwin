@@ -22,44 +22,49 @@ int main (int argc, char **argv)
 	// 4-byte integer
     printf("type a 4-byte decimal number: ");
     nParsed = scanf("%d", &i);
-    if (nParsed != 1)               // check we parsed all the items requested
+    if (nParsed != 1) {             // check we parsed all the items requested
         printf("error!\n\n");
+		eatLine();
+		}
     else
         printf("you typed %d\n\n", i);
-    eatLine();
 
 	// 2-byte integer
     printf("type a 2-byte decimal number: ");
     nParsed = scanf("%hd", &s);
-    if (nParsed != 1)               // check we parsed all the items requested
+    if (nParsed != 1) {             // check we parsed all the items requested
         printf("error!\n\n");
+		eatLine();
+		}
     else
         printf("you typed %hd\n\n", s);
-    eatLine();
     
     printf("type a 4-byte hex number: ");
     nParsed = scanf("%x", &i);
-    if (nParsed != 1)               // check we parsed all the items requested
+    if (nParsed != 1) {             // check we parsed all the items requested
         printf("error!\n\n");
+		eatLine();
+		}
     else
         printf("you typed 0x%08X\n\n", i);
-    eatLine();
     
     printf("type a 2-byte hex number: ");
     nParsed = scanf("%hx", &s);
-    if (nParsed != 1)               // check we parsed all the items requested
+    if (nParsed != 1) {             // check we parsed all the items requested
         printf("error!\n\n");
+		eatLine();
+		}
     else
         printf("you typed 0x%04hX\n\n", s);
-    eatLine();
     
     printf("type a floating point number: ");
     nParsed = scanf("%f", &f);
-    if (nParsed != 1)               // check we parsed all the items requested
+    if (nParsed != 1) {             // check we parsed all the items requested
         printf("error!\n\n");
+		eatLine();
+		}
     else
         printf("you typed %f\n\n", f);
-    eatLine();
 
     printf("type a string: ");
     nParsed = scanf("%8s", str);    // read in string of length <= 8

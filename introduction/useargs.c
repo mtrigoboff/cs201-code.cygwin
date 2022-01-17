@@ -15,7 +15,7 @@ int main (int argc, char **argv)
     i = atoi(argv[1]);
     d = atof(argv[2]);
     sum = i + d;
-    printf("%f = %d + %f\n", sum, i, d);
+    printf("%d + %.2f = %.2f\n", i, d, sum);
     
     return 0;
 }

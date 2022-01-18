@@ -7,28 +7,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void shift (int n, int exp2, int divisor)
+void shift (short n, short exp2, short divisor)
 {
-    int     x;
-    int     shifted;
-    int     quotient;
-    
-    x = n;
-    shifted = x >> exp2;
-    quotient = x / divisor;
-    printf("%4d >> %d = %4d     %4d / %d = %4d\n", n, exp2, shifted, n, divisor, quotient);
+    short   shifted =  n >> exp2;
+    short   quotient = n / divisor;
+
+    printf("%3d >> %d = %2d     %3d / %d = %2d\n", n, exp2, shifted, n, divisor, quotient);
 }
 
 int main (int argc, char **argv)
 {
-    int     exp2 = 2;
-    int     limit = -33;
-    int     limitCmdLine;
-    int     divisor;
-    int     i;
+    short	exp2 = 2;
+    short   limit = -15;
+    short   limitCmdLine;
+    short   divisor;
+    short   i;
     
-    printf("\n   shift right            divide \n");
-    printf(  "   -----------            ------ \n\n");
+    printf("\n shift right         divide\n");
+    printf(  "-------------     ------------\n");
     
     if (argc > 1)
         exp2 = atoi(argv[1]);           // how many bits to shift

@@ -2,62 +2,52 @@
 // using right-shift to mimic division by a power of 2
 
 #include <stdio.h>
+#include <stdlib.h>
 
-void shift (int n, int pow2)
+void shift (short n, short pow2)
 {
-    int     x;
+    short	nBiased;
 
-    printf("shifting %d left and right by %d bits\n", n, pow2);
-    printf("                    %5d 0x%08X\n", n, n);
-
-    x = n;
-    x <<= pow2;
-    printf("shift left:         %5d 0x%08X\n", x, x);
-
-    x = n;
-    x >>= pow2;
-    printf("shift right:        %5d 0x%08X\n", x, x);
+    printf("shifting %hd left and right by %hd bits\n", n, pow2);
+    printf("shift left:       %5hd\n", n << pow2);
+    printf("shift right:      %5hd\n", n >> pow2);
 
     if (n < 0) {
-        x = n;
-        x += (1 << pow2) - 1;   // add the "bias" before shifting
-        x >>= pow2;
-        printf("biased shift right: %5d 0x%08X\n", x, x);
+        nBiased = n + (1 << pow2) - 1;	// add the "bias" before shifting
+        nBiased >>= pow2;
+        printf("biased shift right: %3hd\n", nBiased);
         }
 
     printf("\n");
 }
 
-// divides x by 2^k, using a right shift and the "bias" method
-// described in the textbook
-void div2 (int x, int k)
+// divides n by 2^exp, using a right shift and
+// the "bias" method described in the textbook
+void div2 (int n, int exp)
 {
-    printf("biased divide: %4d / 2^%d is: %d\n\n",
-           x, k, (x < 0 ? (x + ((1 << k) - 1)) : x) >> k);
+    printf("biased divide: %4d / 2^%d is: %3d\n\n", n, exp,
+		   (n < 0 ? (n + ((1 << exp) - 1)) : n) >> exp);
+		   /* if n < 0
+			*   n += (1 << exp) - 1
+			* n >>= exp
+			*/
 }
 
 int main (int argc, char **argv)
 {
-    shift(13, 1);
-    shift(-13, 1);
+	if (argc < 3) {
+		printf("need number to shift, power of 2 to shift by\n");
+		exit(-1);
+		}
 
-    shift(14, 1);
-    shift(-14, 1);
+	short	n =		atoi(argv[1]);
+	short	pow2 =	atoi(argv[2]);
 
-    shift(15, 1);
-    shift(-15, 1);
+    shift(n, pow2);
+    shift(-n, pow2);
 
-    shift(16, 1);
-    shift(-16, 1);
-
-    shift(13, 2);
-    shift(-13, 2);
-
-    div2(13, 1);
-    div2(-13, 1);
-
-    div2(13, 2);
-    div2(-13, 2);
+    div2(n, pow2);
+    div2(-n, pow2);
 
     return 0;
 }

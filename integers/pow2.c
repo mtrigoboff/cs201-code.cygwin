@@ -1,7 +1,7 @@
 // demonstrates the problem described in Bryant & O'Hallaron,
 // section 2.3.7.  Using right-shift for division has a problem
 // when the number being divided is negative.  This code
-// prints out a table that shows the difference between the
+// prints out data that shows the difference between the
 // results of right-shift and division.
 
 #include <stdio.h>

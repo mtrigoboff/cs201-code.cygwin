@@ -6,8 +6,8 @@
 
 int main (int argc, char **argv)
 {
-    int             s = -1;
-    unsigned int    u = 3;
+    signed char		s = -1;
+    unsigned char	u = 3;
 
     printf("s = %d, u = %u\n", s, u);
     if (s < u)

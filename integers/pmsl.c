@@ -13,7 +13,6 @@
 #define PRECISION    8
 
 static char     helpStr[] = "call with 3 args: nBits numerator denominator";
-static double   oneHalf = 0.5;
 
 int main (int argc, char **argv)
 {
@@ -21,7 +20,6 @@ int main (int argc, char **argv)
     int     numerator;
     int     denominator;
     double  error;          // difference between fractional binary value and floating point value
-    double  p2 = oneHalf;   // current power of 1/2 we're using
     int     b;
 
     if (argc != 4) {
@@ -41,6 +39,8 @@ int main (int argc, char **argv)
 	{
     double  calcValue;			// floating point calculated value of fraction
     double  bitsValue = 0;		// numeric value of the fractional binary representation
+	double  oneHalf = 0.5;
+    double  p2 = oneHalf;   // current power of 1/2 we're using
 
     calcValue = ((double) numerator) / (double) denominator;
     error = calcValue;

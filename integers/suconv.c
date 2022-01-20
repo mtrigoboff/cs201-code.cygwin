@@ -1,3 +1,5 @@
+#pragma GCC diagnostic ignored "-Wunused-variable"
+
 // demonstrates that there's no data conversion when moving
 // integer data between signed and unsigned variables
 
@@ -9,6 +11,7 @@ int main (int argc, char **argv)
 {
     int             s = -38;
     unsigned int    u = s;         // same bits, no data conversion
+    int             s2 = u;
 
     printf("               u          s\n");
     printf("          ---------- ----------\n");

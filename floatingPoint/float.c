@@ -128,12 +128,15 @@ static void printValue(int n)
 			}
 		}
 	else if (expBits == expMask) {		// infinity or NaN
-		if (fractBits == 0)
+		if (fractBits == 0) {
 			printSpecialValue(signBit ? "-infinity" : "+infinity");
-		else
+			prevValue = inf;
+			}
+		else {
 			printSpecialValue(fractBits & leftBitMask ? "QNaN" : "SNaN");
 				// fractBits is shifted all the way to the left
-		prevValue = 0.0;
+			prevValue = 0.0;
+			}
 		return;
 		}
 	else {								// normalized

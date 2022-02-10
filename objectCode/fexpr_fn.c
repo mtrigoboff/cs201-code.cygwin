@@ -4,16 +4,16 @@
 
 #pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 
+double fn (double w, double x, double y, double z)
+{
+    return 3.0 * (w + x) / (y * z);
+}
+
 int main ()
 {
     double  f;
     
-    double	w = 213.0;
-	double	x =  43.0;
-	double	y =  20.0;
-	double	z =   1.2;
-
-    f = 3.0 * (w + x) / (y * z);
+    f = fn(213.0, 43.0, 20.0, 1.2);
     
     return 0;
 }

@@ -9,7 +9,7 @@
 // the assembly code stores value from ST(0) to sum,
 // then the return code loads the value from sum
 // back into ST(0).
-double add1(double x, double y)
+double add(double x, double y)
 {
 	double	sum;
 
@@ -40,8 +40,8 @@ int main(int argc, char **argv)
 		y = atof(argv[2]);
 		}
 
-	sum = add1(x, y);
-	printf("%.2f = add1(%.2f, %.2f)\n", sum, x, y);
+	sum = add(x, y);
+	printf("%.2f = add(%.2f, %.2f)\n", sum, x, y);
 
 	return 0;
 }

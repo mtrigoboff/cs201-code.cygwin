@@ -4,9 +4,10 @@
 # unignore all dirs
 !*/
 
-# unignore C source files
+# unignore source files
 !*.h
 !*.c
+!*.cpp
 
 # unignore Markdown files
 !*.md

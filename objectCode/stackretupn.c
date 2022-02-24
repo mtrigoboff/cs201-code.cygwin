@@ -43,7 +43,7 @@ int main(int argc, char **argv)
         printf("bad args\n");
         return -1;
         }
-    printf("main: calling fn with depth == %d, skip == %d\n", depth, skip);
+    printf("main: calling fn with skip == %d, depth == %d\n", skip, depth);
     fn(depth, skip);
     printf("main: fn(%d) returned\n", depth);
 

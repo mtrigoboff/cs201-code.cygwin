@@ -53,7 +53,7 @@ static int createMask(int n)
 
 static void setup()
 {
-	printf("length of type 'int' = %d\n", sizeof(int));
+	printf("length of type 'int' = %ld\n", sizeof(int));
 	printf("exponent bits: %d, fraction bits: %d\n", expNBits, fractNBits);
 
 	nBits = 1 + expNBits + fractNBits;
@@ -130,7 +130,7 @@ static void printValue(int n)
 	else if (expBits == expMask) {		// infinity or NaN
 		if (fractBits == 0) {
 			printSpecialValue(signBit ? "-infinity" : "+infinity");
-			prevValue = inf;
+			prevValue = INFINITY;
 			}
 		else {
 			printSpecialValue(fractBits & leftBitMask ? "QNaN" : "SNaN");

@@ -12,5 +12,8 @@
 # unignore Markdown files
 !*.md
 
+# unignore README.txt
+!**/README.txt
+
 # unignore .gitignore
 !.gitignore

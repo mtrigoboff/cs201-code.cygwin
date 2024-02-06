@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 		"		mov		(%%ebx, %%ecx, 1), %%al		\n" // get indexed element of array
 
 		// conditional statement
-		"		cmp		$3, %[localVarIn]			\n" // comparison operation
+		"		cmpl	$3, %[localVarIn]			\n" // comparison operation
 		"		jg		gt							\n" // conditional jump if > 3
 		"		nop									\n" // didn't jump
 		"gt:	nop									\n" // conditional jump target

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 int main (int argc, char **argv)
 {
@@ -7,8 +8,8 @@ int main (int argc, char **argv)
     char    iHeader[] = "the value of i is:  ";
     char    piHeader[] = "the value of pi is: ";
     char	ch = '$';
-    float   pi = 3.1415928;
-    double  dpi = 3.1415928;
+    float   pi = M_PI;
+    double  dpi = M_PI;
 
 	// 4-byte integers
     int     i = 5;
@@ -64,10 +65,9 @@ int main (int argc, char **argv)
 	printf("unsigned short: %6hu, 0x%04hX\n\n", us, us);
     
     // printing an address
-    printf("address of ruler variable: 0x%08X\n",
-		   (int) ruler);
-    printf("address of ruler variable: %8p\n\n",
-		   ruler);
+	
+    printf("address of ruler variable: 0x%08lX\n", (long) ruler);
+    printf("address of ruler variable: %8p\n\n", ruler);
 
     // printing floating point numbers
     

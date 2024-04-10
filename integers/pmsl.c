@@ -15,6 +15,7 @@
 static char     helpStr[] = "call with 3 args: nBits numerator denominator";
 
 int main (int argc, char **argv)
+
 {
     int     nBits;
     int     numerator;
@@ -40,12 +41,13 @@ int main (int argc, char **argv)
     double  calcValue;			// floating point calculated value of fraction
     double  bitsValue = 0;		// numeric value of the fractional binary representation
 	double  oneHalf = 0.5;
-    double  p2 = oneHalf;   // current power of 1/2 we're using
+    double  p2 = oneHalf;		// current power of 1/2 we're using
 
     calcValue = ((double) numerator) / (double) denominator;
     error = calcValue;
-    printf("\nnumerator = %d, denominator = %d\n", numerator, denominator);
-    printf("\n%d bit value:    0.", nBits);
+    printf("\nnumerator:     %d\n", numerator);
+    printf("denominator:   %d\n", denominator);
+    printf("\n%02d bit value:  0.", nBits);
     
     // compute fractional binary value by adding powers of 1/2 as needed,
     // simultaneously print out the fractional binary value
@@ -59,10 +61,10 @@ int main (int argc, char **argv)
             printf("0");
         p2 *= oneHalf;          // next power of 1/2
         }
-    printf("\n\ncalcValue: %*.*f\n", WIDTH, PRECISION, calcValue);
-    printf(    "bitsValue: %*.*f\n", WIDTH, PRECISION, bitsValue);
-    printf(    "error:     %*.*f\n", WIDTH, PRECISION, error);
-    printf(    "           %*.*e\n", WIDTH, PRECISION - 4, error);
+    printf("\n\ncalcValue:   %*.*f\n", WIDTH, PRECISION, calcValue);
+    printf(    "bitsValue:   %*.*f\n", WIDTH, PRECISION, bitsValue);
+    printf(    "error:       %*.*f\n", WIDTH, PRECISION, error);
+    printf(    "             %*.*e\n", WIDTH, PRECISION - 4, error);
 	}
 
     printf("\n");

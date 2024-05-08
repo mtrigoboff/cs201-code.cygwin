@@ -57,10 +57,10 @@ static void setup()
 	printf("exponent bits: %d, fraction bits: %d\n", expNBits, fractNBits);
 
 	nBits = 1 + expNBits + fractNBits;
-	nFloats = pow(2.0, nBits);
+	nFloats = 1 << nBits;
 	nHexChars = nBits / 4 + (nBits % 4 ? 1 : 0);
 
-	expBias = pow(2.0, expNBits - 1) - 1;
+	expBias = (1 << (expNBits - 1)) - 1;
 
 	expMask = createMask(expNBits);
 
